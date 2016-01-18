@@ -1,3 +1,47 @@
-baseurl = "http://replace-this-with-your-hugo-site.com/"
-languageCode = "en-us"
-title = "My New Hugo Site"
+baseurl = "http://example.com/"
+title = "mytitle"
+theme = "ghostwriter"
+languageCode = "fr-fr"
+copyright = "My Name"
+
+[Author]
+    name = "Clément Gallet"
+
+[Taxonomies]
+    tag = "tags"
+    topic = "topics"
+
+[Params]
+    intro = true
+    headline = "My headline"
+    description = "My description"
+    github = "https://github.com/clementgallet"
+    twitter = "https://twitter.com/KilayeJV"
+
+[Permalinks]
+    post = "/:filename/"
+
+[[menu.main]]
+    name = "Blog"
+    url = "/"
+    weight = 1
+
+[[menu.main]]
+    name = "Rubik"
+    url = "/topics/rubik"
+    weight = 2
+
+[[menu.main]]
+    name = "JV"
+    url = "/topics/jv/"
+    weight = 3
+
+[[menu.main]]
+    name = "Musique"
+    url = "/topics/music/"
+    weight = 4
+
+[[menu.main]]
+    name = "About"
+    url = "/page/about/"
+    weight = 5

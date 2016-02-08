@@ -17,6 +17,7 @@ copyright = "My Name"
     description = "My description"
     github = "https://github.com/clementgallet"
     twitter = "https://twitter.com/KilayeJV"
+    twitch = "https://twitch.tv/kilaye"
 
 [Permalinks]
     post = "/:filename/"

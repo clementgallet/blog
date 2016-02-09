@@ -5,11 +5,5 @@
     {{ end }}
     <p class="post-date">
         <span>Publié le <time datetime="{{ .Date.Format "2006-01-02" }}" itemprop="datePublished">{{ .Date.Format "02/01/2006" }}</time></span>
-        <span>par</span>
-        <span itemscope="" itemprop="author" itemtype="http://schema.org/Person">
-            <span itemprop="name">
-                <a href="{{ .Site.Author.profile }}" itemprop="url" rel="author">{{ .Site.Author.name }}</a>
-            </span>
-        </span>
     </p>
 </header>

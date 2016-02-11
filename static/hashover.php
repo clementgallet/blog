@@ -174,15 +174,8 @@
 		global $cmt_count, $total_count;
 		$cmt_count--; $total_count--;
 
-		if ($total_count == $cmt_count) {
-			$show_count = $cmt_count . ' Comment';
-			if ($cmt_count != '1') $show_count .= 's';
-		} else {
-			$show_count = $cmt_count . ' Comment';
-			if ($cmt_count != '1') $show_count .= 's';
-			$show_count .= ' (' . $total_count . ' counting repl';
-			$show_count .= ($total_count != '2') ? 'ies)' : 'y)';
-		}
+    $show_count = $total_count . ' commentaire';
+    if ($total_count != '1') $show_count .= 's';
 
 		return $show_count;
 	}
@@ -197,22 +190,6 @@
 			} else {
 				exit(jsAddSlashes('<a href="' . $_GET['count_link'] . '#comments">Post Comment</a>', 'single'));
 			}
-		}
-	}
-
-	// Clear message cookie
-	if (isset($_COOKIE['message']) and !empty($_COOKIE['message'])) {
-		setcookie('message', '', 1, '/', str_replace('www.', '', $domain));
-	}
-
-	// Check if either a comment or reply failed to post
-	if (isset($_COOKIE['success']) and $_COOKIE['success'] == 'no') {
-		setcookie('success', '', 1, '/', str_replace('www.', '', $domain));
-
-		if (isset($_COOKIE['replied']) and !empty($_COOKIE['replied'])) {
-			$text['comment_form'] = $text['reply_form'];
-			$text['post_button'] = $text['post_reply'];
-			setcookie('replied', '', 1, '/', str_replace('www.', '', $domain));
 		}
 	}
 

@@ -1,8 +1,8 @@
 baseurl = "/"
-title = "mytitle"
+title = "CG"
 theme = "ghostwriter"
 languageCode = "fr-fr"
-copyright = "My Name"
+copyright = "Clément Gallet"
 
 [Author]
     name = "Clément Gallet"
@@ -13,12 +13,12 @@ copyright = "My Name"
 
 [Params]
     intro = true
-    headline = "My headline"
-    description = "My description"
+    headline = "Le blog de CG"
+    description = "Où je parle de trucs"
     github = "https://github.com/clementgallet"
     twitter = "https://twitter.com/KilayeJV"
     twitch = "https://twitch.tv/kilaye"
-
+    
 [Permalinks]
     post = "/:filename/"
 
@@ -43,6 +43,6 @@ copyright = "My Name"
     weight = 4
 
 [[menu.main]]
-    name = "About"
+    name = "À propos"
     url = "/page/about/"
     weight = 5

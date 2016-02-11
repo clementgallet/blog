@@ -32,7 +32,7 @@
 	$icons		= 'no';					// Whether comments have avatar icons (Gravatar)
 	$icon_size	= '45';						// Size of Gravatar icons in pixels
 	$indention	= 'left';					// Side to add comment indention on
-	$rows		= '5';						// Default comment box height in rows
+	$rows		= '3';						// Default comment box height in rows
 	$popular	= '5';						// Minimum likes a comment needs to be popular
 	$top_cmts	= '2';						// Number of comments allowed to become popular
 	$ip_addrs	= 'no';						// Whether to store users' IP addresses

@@ -1,15 +1,11 @@
 <a name="' + permalink + '"></a>
 <div style="margin: ' + indent + '; clear: both;" class="' + cmtclass + '">
 	<div class="cmtbubble">
-		<div class="cmtheader">' + name + ' ' + thread + '</div>
-		<div id="cmtdata-' + permalink + '" class="cmtdata">' + comment + '</div><br>
-		<form name="reply_form-' + permalink + '" id="reply_form-' + permalink + '" method="post" action="/hashover.php">
-			<div id="cmtforms-' + permalink + '" align="left">' + form + '</div>
-		</form>
-
-		<div id="cmtopts-' + permalink + '" class="cmtopts"' + cmtopts_style + '>
-			<span class="cmtbuttons" style="float: left;">' + reply_link + '</span>
-			<span class="cmtdate">' + date + '&nbsp;</span>
-		</div>
+		<div class="cmtheader"><span class="cmtname">' + name + '</span><span class="spacer">•</span>' + date + '</div>
+		<div id="cmtdata-' + permalink + '" class="cmtdata"><p>' + comment + '</p></div>
+		<div id="cmtopts-' + permalink + '" class="cmtopts"' + cmtopts_style + '>' + reply_link + '</div>
 	</div>
+    <form name="reply_form-' + permalink + '" id="reply_form-' + permalink + '" method="post" action="/hashover.php">
+    <div id="cmtforms-' + permalink + '" class="cmtbox">' + form + '</div>
+  </form>
 </div>

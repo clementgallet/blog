@@ -64,17 +64,17 @@
 		),
 
 		'fr' => array(
-			'comment_form'	=> 'Écrivez votre commentaire ici (les autres champs sont optionnels)',	// "Comment" field's default text
-			'reply_form'	=> 'Écrivez votre réponse ici (les autres champs sont optionnels)',	// "Reply" field's default text
-			'post_button'	=> 'Postez votre commentaire',				// "Post Comment" button's default text
+			'comment_form'	=> 'Écrivez votre commentaire ici',	// "Comment" field's default text
+			'reply_form'	=> 'Écrivez votre réponse ici',	// "Reply" field's default text
+			'post_button'	=> 'Commenter',				// "Post Comment" button's default text
 			'del_note'	=> 'Ce commentaire a été supprimé.',		// Notice of deleted comment
 			'cmt_deleted'	=> 'Commentaire supprimé !',				// Notice of successful comment deletion
 			'options'	=> 'Options',					// "Options" button text
 			'cancel'	=> 'Annuler',					// "Cancel" button text
 			'reply_to_cmt'	=> 'Répondre au commentaire',
 			'edit_your_cmt'	=> 'Éditer votre commentaire',
-			'nickname_tip'	=> 'Nom ou @utilisateur Twitter',
-			'nickname'	=> 'Nom or @utilisateur',
+			'nickname_tip'	=> 'Nom ou compte Twitter',
+			'nickname'	=> 'Nom ou @twitter',
 			'password_tip'	=> 'Mot de passe (uniquement nécessaire pour éditer/supprimer votre commentaire)',
 			'password'	=> 'Mot de passe',
 			'email'		=> 'Adresse email',
@@ -83,8 +83,8 @@
 			'cmt_needed'	=> 'Vous n&apos;avez pas écrit de commentaire. Utilisez le champ ci-dessous.',
 			'reply_needed'	=> 'Vous n&apos;avez pas écrit de réponse. Utilisez le champ ci-dessous.',
 			'post_fail'	=> 'Le commentaire n&apos;a pas été posté ! Vous n&apos;avez pas les permissions suffisantes.',
-			'cmt_tip'	=> 'Balises HTML acceptées : &lt;b&gt;, &lt;u&gt;, &lt;i&gt;, &lt;s&gt;, &lt;pre&gt;, &lt;ul&gt;, &lt;ol&gt;, &lt;li&gt;, &lt;blockquote&gt;, &lt;code&gt; HTML protégé, les URLs deviennent des liens, et [img]URL[/img] affiche une image externe.',
-			'post_reply'	=> 'Poster une réponse',
+			'cmt_tip'	=> 'HTML protégé, les URLs deviennent des liens.',
+			'post_reply'	=> 'Répondre',
 			'delete'	=> 'Supprimer',
 			'subscribe_tip'	=> 'Souscrire à la notification par email',
 			'subscribe'	=> 'Souscrire',

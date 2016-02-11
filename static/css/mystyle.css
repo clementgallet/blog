@@ -2,12 +2,13 @@
 
 figcaption {
    font-size : .8em;
+   font-weight: 600;
 #   padding : 0px 0px;
 #   background : #dddddd;
    display :block;
    text-align :center;
 #   font-family : georgia, serif;
-   font-style : italic;
+#   font-style : italic;
 #   border-radius : 0 0 7px 7px ;
 #   -moz-border-radius : 0 0 7px 7px ;
 #   -webkit-border-radius : 0 0 7px 7px ;

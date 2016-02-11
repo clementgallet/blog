@@ -90,44 +90,37 @@ if (document.getElementById('cmtcount') != null) {
 
 // Displays reply form
 function reply(r, f) {
-	var reply_form = '\n<b class="cmtfont"><?php echo $text['reply_to_cmt']; ?></b>\n\
-	<span<?php echo (isset($_COOKIE['name']) and !empty($_COOKIE['name'])) ? ' style="max-height: 0px;"' : ''; ?> class="options" id="options-'+r+'"><hr style="clear: both;">\n\
-	<table width="100%" cellpadding="0" cellspacing="0" align="center">\n\
-	<tbody>\n<tr>\n';
+  if (document.getElementById('cmtreply-' + r).innerHTML == 'Fermer') {
+    document.getElementById('cmtforms-' + r).innerHTML = '';
+    document.getElementById('cmtreply-' + r).innerHTML = 'Répondre';
+    return false;
+  }
+  
+	var reply_form = '\n<span class="options" id="options-'+r+'">\n';
+
 
 	if (name_on == 'yes') {
-		reply_form += '<td width="1%" rowspan="2">\n<?php
-		if (isset($_COOKIE['name']) and preg_match('/^@([a-zA-Z0-9_@]{1,29}$)/', $_COOKIE['name'])) {
-			echo '<img align="left" width="34" height="34" src="' . $root_dir . 'scripts/avatars.php?username=' . $_COOKIE['name'] . '&email=' . md5(strtolower(trim($_COOKIE['email']))) . '">';
-		} else {
-			echo '<img align="left" width="34" height="34" src="';
-			echo (isset($_COOKIE['email'])) ? 'http://gravatar.com/avatar/' . md5(strtolower(trim($_COOKIE['email']))) . '?d=http://' . $domain . $root_dir . 'images/avatar.png&s=34&r=pg">' : $root_dir . 'images/avatar.png">';
-		}
-		?>\n</td>\n';
+		reply_form += '<input type="text" name="name" title="<?php echo $text['nickname_tip']; ?>" value="<?php echo $text['nickname']; ?>" maxlength="30" class="opt-name" onFocus="this.value=(this.value == \'<?php echo $text['nickname']; ?>\') ? \'\' : this.value;" onBlur="this.value=(this.value == \'\') ? \'<?php echo $text['nickname']; ?>\' : this.value;">\n';
 	}
 
-	if (name_on == 'yes') {
-		reply_form += '<td align="right">\n<input type="text" name="name" title="<?php echo $text['nickname_tip']; ?>" value="<?php echo (isset($_COOKIE['name'])) ? $_COOKIE['name'] : $text['nickname']; ?>" maxlength="30" class="opt-name" onFocus="this.value=(this.value == \'<?php echo $text['nickname']; ?>\') ? \'\' : this.value;" onBlur="this.value=(this.value == \'\') ? \'<?php echo $text['nickname']; ?>\' : this.value;">\n</td>\n';
-	}
-
-	reply_form += '</tr>\n\
-	</tbody>\n</table>\n</span>\n\
-	<textarea rows="6" cols="62" name="comment" onFocus="this.value=(this.value==\'<?php echo $text['reply_form']; ?>\') ? \'\' : this.value;" onBlur="this.value=(this.value==\'\') ? \'<?php echo $text['reply_form']; ?>\' : this.value;" style="width: 100%;" title="<?php echo $text['cmt_tip']; ?>"><?php echo $text['reply_form']; ?></textarea><br>\n\
-	<input class="post_cmt" type="submit" value="<?php echo $text['post_reply']; ?>">\n\
-  <input type="button" value="<?php echo $text['cancel']; ?>" onClick="cancelform(\''+r+'\'); return false;">\n\<?php
+	reply_form += '</span>\n\
+	<textarea rows="3" cols="62" name="comment" onFocus="this.value=(this.value==\'<?php echo $text['reply_form']; ?>\') ? \'\' : this.value;" onBlur="this.value=(this.value==\'\') ? \'<?php echo $text['reply_form']; ?>\' : this.value;" style="width: 100%;" title="<?php echo $text['cmt_tip']; ?>"><?php echo $text['reply_form']; ?></textarea><br>\n\
+	<input class="post_cmt" type="submit" value="<?php echo $text['post_reply']; ?>">\n\<?php
 	echo (isset($_GET['canon_url']) or isset($canon_url)) ? "\n\t" . '<input type="hidden" name="canon_url" value="' . $page_url . '">\n\\' . PHP_EOL : PHP_EOL; ?>
 	<input type="hidden" name="cmtfile" value="' + f + '">\n\
 	<input type="hidden" name="reply_to" value="'+f+'">\n';
 
-	document.getElementById('cmtopts-' + r).style.display = 'none';
+	//document.getElementById('cmtopts-' + r).style.display = 'none';
 	document.getElementById('cmtforms-' + r).innerHTML = reply_form;
+	document.getElementById('cmtreply-' + r).innerHTML = 'Fermer';
 	return false;
 }
 
 // Function to cancel reply and edit forms
 function cancelform(f) {
-	document.getElementById('cmtopts-' + f).style.display = '';
+	//document.getElementById('cmtopts-' + f).style.display = '';
 	document.getElementById('cmtforms-' + f).innerHTML = '';
+	document.getElementById('cmtreply-' + r).innerHTML = 'Répondre';
 	return false;
 }
 
@@ -241,12 +234,9 @@ function sort_comments(method) {
 
 //	echo jsAddSlashes('<a name="comments"></a><br><b class="cmtfont">' . $text['post_cmt'] . ':</b>');
 
-	if (isset($_COOKIE['message']) and !empty($_COOKIE['message'])) {
-		echo jsAddSlashes('<b id="message" class="cmtfont">' . $_COOKIE['message'] . '</b><br><br>\n');
-	} else {
-		echo jsAddSlashes('<br><br>\n');
-	}
-
+	// Display comment count
+	echo jsAddSlashes('<span class="cmtfont">' . $script = ($cmt_count == "1") ? 'Pas de commentaires</span>\n' : display_count() . '</span>\n') . PHP_EOL;
+  
 	echo jsAddSlashes('<form id="comment_form" name="comment_form" action="/hashover.php" method="post">\n');
 /*	echo jsAddSlashes('<span class="cmtnumber">');
 
@@ -258,16 +248,11 @@ function sort_comments(method) {
 
 	echo jsAddSlashes('</span>\n');*/
 	echo jsAddSlashes('<div class="cmtbox" align="center">\n');
-	echo jsAddSlashes('<table width="100%" cellpadding="0" cellspacing="0">\n<tbody>\n<tr>\n');
 
 	// Display name input tag if told to
 	echo "if (name_on == 'yes') {\n";
-	echo "\t" . jsAddSlashes('<td align="right">\n');
-	echo "\t" . jsAddSlashes('<input type="text" name="name" title="' . $text['nickname_tip'] . '" maxlength="30" class="opt-name" onFocus="this.value=(this.value == \'' . $text['nickname'] . '\') ? \'\' : this.value;" onBlur="this.value=(this.value == \'\') ? \'' . $text['nickname'] . '\' : this.value;" value="' . $script = (isset($_COOKIE['name'])) ? $_COOKIE['name'] . '">\n' : $text['nickname'] . '">\n');
-	echo "\t" . jsAddSlashes('</td>\n');
+	echo "\t" . jsAddSlashes('<input type="text" name="name" title="' . $text['nickname_tip'] . '" maxlength="30" class="opt-name" onFocus="this.value=(this.value == \'' . $text['nickname'] . '\') ? \'\' : this.value;" onBlur="this.value=(this.value == \'\') ? \'' . $text['nickname'] . '\' : this.value;" value="' . $script = $text['nickname'] . '">\n');
 	echo "}\n\n";
-
-	echo jsAddSlashes('</tr>\n</tbody>\n</table>\n') . PHP_EOL;
 
 	echo jsAddSlashes('<div id="requiredFields" style="display: none;">\n');
 	echo jsAddSlashes('<input type="text" name="summary" value="" placeholder="Summary">\n');
@@ -278,39 +263,17 @@ function sort_comments(method) {
 	echo jsAddSlashes('</div>\n') . PHP_EOL;
 
 	$rows = "'+rows+'";
-	$replyborder = (isset($_COOKIE['success']) and $_COOKIE['success'] == "no") ? ' border: 2px solid #FF0000 !important; -moz-border-radius: 5px 5px 0px 0px; border-radius: 5px 5px 0px 0px;' : '';
 
-	echo jsAddSlashes('<textarea rows="' . $rows . '" cols="63" name="comment" onFocus="this.value=(this.value==\'' . $text['comment_form'] . '\') ? \'\' : this.value;" onBlur="this.value=(this.value==\'\') ? \'' . $text['comment_form'] . '\' : this.value;" style="width: 100%;' . $replyborder . '" title="' . $text['cmt_tip'] . '">' . $text['comment_form'] . '</textarea><br>\n');
+	echo jsAddSlashes('<textarea rows="3" cols="63" name="comment" onFocus="this.value=(this.value==\'' . $text['comment_form'] . '\') ? \'\' : this.value;" onBlur="this.value=(this.value==\'\') ? \'' . $text['comment_form'] . '\' : this.value;" style="width: 100%;" title="' . $text['cmt_tip'] . '">' . $text['comment_form'] . '</textarea><br>\n');
 	echo jsAddSlashes('<input type="submit" value="' . $text['post_button'] . '"><br>\n');
 	echo (isset($_GET['canon_url']) or isset($canon_url)) ? jsAddSlashes('<input type="hidden" name="canon_url" value="' . $page_url . '">\n') : '';
-	echo (isset($_COOKIE['replied'])) ? jsAddSlashes('<input type="hidden" name="reply_to" value="' . $_COOKIE['replied'] . '">\n') : '';
-	echo jsAddSlashes('</div>\n</form><br>\n'). PHP_EOL;
-
-	// Display three most popular comments
-	if (!empty($top_likes)) {
-		echo jsAddSlashes('<br><b class="cmtfont">' . $text['popular_cmts'] . ' Comment' . ((count($top_likes) != '1') ? 's' : '') . ':</b>\n') . PHP_EOL;
-		echo 'var popComments = [' . PHP_EOL;
-
-		for ($p = 1; $p <= count($top_likes) and $p <= $top_cmts; $p++) {
-			if (!empty($top_likes)) {
-				echo parse_comments(array_shift($top_likes), '', 'no');
-			}
-		}
-
-		echo '];' . PHP_EOL . PHP_EOL;
-		echo 'for (var comment in popComments) {' . PHP_EOL;
-		echo "\t" . 'parse_template(popComments[comment], false);' . PHP_EOL;
-		echo '}' . PHP_EOL . PHP_EOL;
-	}
+	echo jsAddSlashes('</div>\n</form>\n'). PHP_EOL;
 
 	if (!empty($show_cmt)) {
 		echo 'var comments = [' . PHP_EOL;
 		echo $show_cmt;
 		echo '];' . PHP_EOL . PHP_EOL;
 	}
-
-	// Display comment count
-	echo jsAddSlashes('<br><b class="cmtfont">' . $text['showing_cmts'] . ' ' . $script = ($cmt_count == "1") ? '0 Comments:</b>\n' : display_count() . ':</b>\n') . PHP_EOL;
 
 	// Display comments, if there are no comments display a note
 	if (!empty($show_cmt)) {
@@ -328,14 +291,14 @@ function sort_comments(method) {
 	}
 
 	echo jsAddSlashes('</div><br>\n') . PHP_EOL;
-	echo jsAddSlashes('<center>\n');
-	echo jsAddSlashes('<a href="http://tildehash.com" target="_blank">HashOver Comments</a>\n');
+//	echo jsAddSlashes('<center>\n');
+//	echo jsAddSlashes('<a href="http://tildehash.com" target="_blank">HashOver Comments</a>\n');
 	//if (!empty($show_cmt)) echo jsAddSlashes('<a href="http://' . $domain . '/hashover.php?rss=' . $page_url . '" target="_blank">RSS Feed</a> &middot;\n');
 	//echo jsAddSlashes('<a href="http://' . $domain . '/hashover.zip" rel="hashover-source" target="_blank">Source Code</a> &middot;\n');
 	//echo jsAddSlashes('<a href="http://' . $domain . '/hashover.php" rel="hashover-javascript" target="_blank">JavaScript</a> &middot;\n');
 	//echo jsAddSlashes('<a href="http://tildehash.com/hashover/changelog.txt" target="_blank">ChangeLog</a> &middot;\n');
 	//echo jsAddSlashes('<a href="http://tildehash.com/hashover/archives/" target="_blank">Archives</a><br>\n');
-	echo jsAddSlashes('</center>\n');
+//	echo jsAddSlashes('</center>\n');
 
 	// Script execution ending time
 	$exec_time = explode(' ', microtime());

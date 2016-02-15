@@ -1,0 +1,7 @@
+<!-- image -->
+<figure class="side">
+    <img src="{{ .Get "src" }}" {{ with .Get "alt"}}alt="{{.}}"{{ end }} />
+    <figcaption>{{ .Inner }}
+    </figcaption>
+</figure>
+<!-- image -->

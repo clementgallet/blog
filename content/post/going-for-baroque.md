@@ -2,7 +2,7 @@
 author = "Clément Gallet"
 date = "2016-06-24T19:57:29+02:00"
 description = ""
-tags = []
+tags = ["score", "jazz"]
 title = "Arrangement \"Going for Baroque\" de Kenny Wheeler"
 topics = ["music"]
 

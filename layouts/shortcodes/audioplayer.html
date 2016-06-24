@@ -1,0 +1,5 @@
+<audio controls>
+{{ with .Get "ogg"}}  <source src="{{.}}" type="audio/ogg">{{ end }}
+{{ with .Get "mp3"}}  <source src="{{.}}" type="audio/mpeg">{{ end }}
+Your browser does not support the audio element.
+</audio> 

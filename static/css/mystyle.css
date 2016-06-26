@@ -41,3 +41,8 @@ figure.side {
 .side p {
   margin: 0px;
 }
+
+.post-title,
+.page-title {
+  font-size: 34px;
+}
